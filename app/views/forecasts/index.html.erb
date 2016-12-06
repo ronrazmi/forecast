@@ -1,0 +1,45 @@
+<h3> Please enter your city and state </h3>
+
+<%= form_tag '/forecasts' , method: :get do %>
+
+	<div>
+	<%= label_tag :city %>
+	<%= text_field_tag :city %>
+
+	</div>
+
+	<div>
+	<%= label_tag :state %>
+	<%= text_field_tag :state %>
+
+	</div>
+
+	<%= submit_tag 'submit' %>
+	<% end %>
+
+<% if params[:city] && params[:state] %>
+
+
+<h3> Here is the weather  for your city </h3>
+
+<h3> Current Temperature </h3>
+<h2> <%= @forecast["query"]["results"]["channel"]["item"]["condition"]["temp"] %> </h2>
+
+<h3> 5-day Forecast </h3>
+
+<h2> <% @forecast["query"]["results"]["channel"]["item"]["forecast"].each do |forecast| %> </h2>
+	<p> <%= forecast["day"] %> </p>
+	<p> <%= forecast["date"] %> </p>
+	<p> <%= forecast["high"] %> </p>
+	<p> <%= forecast["low"] %> </p>
+	<p> <%= forecast["text"] %> </p>
+
+	<hr>
+	
+<% end %> 
+
+<% end %>
+
+
+
+
